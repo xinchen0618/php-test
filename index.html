@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <ol>
+        <li v-for="message in messages">
+            {{ message.message }}
+        </li>
+    </ol>
+    <input type="text" v-model="message"><button @click="sendMessage">OK</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      ws: null,
+      message: '',
+      messages: [
+        // { message: 'message-1' }
+      ]
+    },
+    methods: {
+      sendMessage: function (event) {
+        if (this.message != '') {
+          this.ws.send(this.message);
+          this.message = '';
+        }
+      }
+    },
+    created: function () {
+      this.ws = new WebSocket("ws://192.168.30.179:9501");
+
+      this.ws.onopen = () => {
+        console.log("client open OK. \n");
+      };
+
+      this.ws.onmessage = (evt) => {
+        console.log("client message OK. ent.data: ", evt.data);
+        this.messages.push({message: evt.data});
+      };
+
+      this.ws.onclose = () => {
+        console.log("client close OK. \n");
+      };
+    }
+  });
+</script>
+</body>
+</html>

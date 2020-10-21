@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    jQuery(function ($) {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api-testing.sfll.xyz/admin_account/v1/login",
+            "method": "POST",
+            "headers": {
+                "X-Sfll-From": "admin-pc",
+                "Content-Type": "application/json",
+                "X-Sfll-Root": "chenxin"
+            },
+            "processData": false,
+            "data": "{\"login_name\": \"admin\",\"password\": \"wawa654321\"}"
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api-testing.sfll.xyz/admin_order/v1/orders",
+            "method": "GET",
+            "headers": {
+                "X-Sfll-From": "admin-pc",
+                "X-Sfll-Root": "chenxin",
+                "X-Sfll-Token": "7vqhbgtvk24cd8i8icpo63keq5"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+    "name": "chenxin/php-test",
+    "authors": [
+        {
+            "name": "chenxin",
+            "email": "chen.xin@hbtown.com"
+        }
+    ],
+    "require": {
+        "brick/phonenumber": "^0.2.2"
+    }
+}
