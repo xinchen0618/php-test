@@ -1,8 +1,9 @@
+#!/usr/bin/env php
 <?php
 
-$pb = 2;
-$market = 2852;
-$grow = 0.12;
+$pb = $argv[1];
+$market = $argv[2];
+$grow = $argv[3];
 
 $base = $market / $pb;
 $year = 1;
