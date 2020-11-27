@@ -1,20 +1,20 @@
 #!/usr/bin/env php
 <?php
 
-$market = $argv[1];
-$pe = $argv[2];
-$grow = $argv[3];
+$pe = $argv[1];
+$grow = $argv[2];
 
-$profitBase = $market / $pe;
+$profitBase = 1 / $pe;
 $profit = 0;
 $year = 1;
 do {
     $profitBase *= (1 + $grow);
     $profit += $profitBase;
-    echo $year, "\t", $profit, "\n";
-    if ($profit >= $market) {
+    if ($profit >= 1) {
         break;
     }
     $year++;
 } while (true);
+
+echo $year, "\n";
 
