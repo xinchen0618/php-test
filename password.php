@@ -11,9 +11,8 @@ echo '$passwordOk:      ' . var_export($passwordOk, true) . "\n";
 echo "\n\n";
 
 
-
 $data = bin2hex(random_bytes(4));
-$key = '7Qs9zuEPtqSgGjiYRWFUMV5ZfBneTpKNs';
+$key = '7Qs9zuEPtqSgGjiY';  // 有效长度16位
 $encryptedData = UtilService::encrypt($data, $key);
 $urlEncode = rawurlencode($encryptedData);
 $urlDecode = urldecode($urlEncode);
@@ -64,7 +63,7 @@ class UtilService
      */
     public static function encrypt(string $data, string $key): string
     {
-        $encryptedData = base64_encode(openssl_encrypt($data, 'AES-128-ECB', $key, OPENSSL_RAW_DATA));
+        $encryptedData = openssl_encrypt($data, 'AES-128-ECB', $key);  // options=0默认值，PKCS#7进行填充, 返回的数据经过 base64 编码
 
         return rtrim(str_replace(['+', '/'], ['-', '_'], $encryptedData), '=');    // base64 url safe
     }
@@ -79,6 +78,6 @@ class UtilService
     {
         $encryptedData = str_replace(['-', '_'], ['+', '/'], $encryptedData);   // base64 url safe
 
-        return openssl_decrypt(base64_decode($encryptedData), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+        return openssl_decrypt($encryptedData, 'AES-128-ECB', $key);
     }
 }
